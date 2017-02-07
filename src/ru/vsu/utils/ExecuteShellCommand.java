@@ -54,7 +54,7 @@ public class ExecuteShellCommand {
         PrintWriter printWriter = new PrintWriter(streamWriter);
 
         printWriter.println("#!/bin/bash");
-        printWriter.println("cd /home/benz/Encryptor-With-Kuznyechik-master/");
+        printWriter.println("cd kuznechik");
         printWriter.println("./program -P " + filePathName + " -D kek.txt " + type);
 
         printWriter.close();

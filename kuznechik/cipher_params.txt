@@ -1,0 +1,3 @@
+KEY=517e9be8a94f2fda2964f31d083acb12f713a2384216ede32e562efdd0bfbb78
+IV=abcdef12345600dacdef94756eeabefa
+INPUT=6b656b
