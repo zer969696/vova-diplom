@@ -5,12 +5,12 @@ import ru.vsu.utils.Person;
 
 import javax.swing.*;
 
-public class ChatDialog extends JDialog {
+public class ChatStartDialog extends JDialog {
     private JPanel contentPane;
     private JButton startChatButton;
     private JButton connectToChatButton;
 
-    public ChatDialog() {
+    public ChatStartDialog() {
         setContentPane(contentPane);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -18,14 +18,20 @@ public class ChatDialog extends JDialog {
             Person currentPerson = new Person();
             currentPerson.generateKeys();
 
-            MainChatDialog dialog = new MainChatDialog(currentPerson);
+            ChatCreationDialog dialog = new ChatCreationDialog(currentPerson);
             dialog.pack();
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
         });
 
         connectToChatButton.addActionListener(e -> {
-            System.out.println(NumberGenerator.generateNonPrime());
+            Person currentPerson = new Person();
+            currentPerson.generateKeys();
+
+            ChatCreationDialog dialog = new ChatCreationDialog(currentPerson);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
         });
     }
 }

@@ -3,7 +3,7 @@ package ru.vsu.utils;
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.Serializable;
+import java.io.*;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
@@ -19,7 +19,6 @@ import java.security.PublicKey;
 public class Person implements Serializable {
 
 
-
     //~ --- [INSTANCE FIELDS] ------------------------------------------------------------------------------------------
 
     private PrivateKey privateKey;
@@ -28,6 +27,9 @@ public class Person implements Serializable {
     private byte[]     secretKey;
     private String     secretMessage;
 
+    private String     IV = "abcdef12345600dacdef94756eeabefa";
+
+    final protected static char[] hexArray = "0123456789abcdef".toCharArray();
 
 
     //~ --- [METHODS] --------------------------------------------------------------------------------------------------
@@ -154,7 +156,7 @@ public class Person implements Serializable {
         try {
 
             // Use 8 bytes (64 bits) for DES, 6 bytes (48 bits) for Blowfish
-            final byte[] shortenedKey = new byte[8];
+            final byte[] shortenedKey = new byte[32];
 
             System.arraycopy(longKey, 0, shortenedKey, 0, shortenedKey.length);
 
@@ -170,5 +172,66 @@ public class Person implements Serializable {
         }
 
         return null;
+    }
+
+    public void encryptAndDecryptMessage(String text, ByteArrayOutputStream baos, String type) {
+
+        File tmp = new File("cipher_params.txt");
+        boolean fileCreated = false;
+
+        try {
+
+            if (!tmp.exists()) {
+                tmp.createNewFile();
+            }
+
+            PrintWriter out = new PrintWriter(tmp.getAbsoluteFile());
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("KEY=");
+            sb.append(bytesToHex(secretKey));
+            sb.append("\n");
+            sb.append("IV=");
+            sb.append(IV);
+            sb.append("\n");
+            sb.append("INPUT=");
+            if (type.equals("-e")) {
+                sb.append(bytesToHex(text.getBytes()));
+            } else if (type.equals("-d")) {
+                sb.append(text);
+            }
+
+
+            out.write(sb.toString());
+
+            out.flush();
+            out.close();
+
+            fileCreated = true;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        if (fileCreated) {
+            ExecuteShellCommand com = new ExecuteShellCommand();
+            try {
+                com.executeCommands(new File("cipher_params.txt").getAbsolutePath(), type, baos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                new File("cipher_params.txt").delete();
+            }
+        }
+    }
+
+
+    public static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for ( int j = 0; j < bytes.length; j++ ) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
     }
 }
