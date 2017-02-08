@@ -114,6 +114,9 @@ public class RegistrationDialog extends JDialog {
                                         DigestUtils.md5(key)
                                 ).encrypt(sbPassword.toString())
                         );
+                        sb.append("\n");
+                        sb.append("KEY=");
+                        sb.append(DigestUtils.md5Hex(key));
                         out.write(sb.toString());
 
                         out.flush();

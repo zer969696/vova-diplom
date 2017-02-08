@@ -62,6 +62,16 @@ public class LoginDialog extends JDialog {
             }
         });
 
+        recreatePasswordLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                PasswordRecoveryDialog dialog = new PasswordRecoveryDialog();
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

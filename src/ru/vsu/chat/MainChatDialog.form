@@ -16,17 +16,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="b7b1e" class="javax.swing.JTextArea" binding="textAreaEncrypted">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="400" height="200"/>
-              </grid>
-            </constraints>
-            <properties>
-              <autoscrolls value="true"/>
-              <lineWrap value="true"/>
-            </properties>
-          </component>
           <component id="96c29" class="javax.swing.JSeparator">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -55,17 +44,6 @@
             </constraints>
             <properties/>
           </component>
-          <component id="cca9d" class="javax.swing.JTextArea" binding="textAreaDecrypted">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="400" height="200"/>
-              </grid>
-            </constraints>
-            <properties>
-              <editable value="false"/>
-              <lineWrap value="true"/>
-            </properties>
-          </component>
           <component id="1afc6" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -82,6 +60,42 @@
               <text value="Результат:"/>
             </properties>
           </component>
+          <scrollpane id="2233d">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="400" height="200"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="b7b1e" class="javax.swing.JTextArea" binding="textAreaEncrypted">
+                <constraints/>
+                <properties>
+                  <autoscrolls value="true"/>
+                  <lineWrap value="true"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+          <scrollpane id="b93ed">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="400" height="200"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="cca9d" class="javax.swing.JTextArea" binding="textAreaDecrypted">
+                <constraints/>
+                <properties>
+                  <editable value="false"/>
+                  <lineWrap value="true"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
     </children>
